@@ -127,8 +127,8 @@ public abstract class MapTest {
         Map<String, String> mExpected = this.createFromArgsRef("test", "value", "test1",
                 "value1");
                 
-        Map.Pair<String, String> i = m.remove(value)
-        Map.Pair<String, String> iexp = mExpected.remove(value)
+        Map.Pair<String, String> i = m.remove("value");
+        Map.Pair<String, String> iexp = mExpected.remove("value");
         
         assertEquals(iexp, i);
         assertEquals(mExpected, m);
@@ -151,8 +151,8 @@ public abstract class MapTest {
         Map<String, String> m = this.createFromArgsTest("test", "value");
         Map<String, String> mExpected = this.createFromArgsRef("test", "value");
         
-        String i = m.value(test);
-        String iexp = mExpected.value(test);
+        String i = m.value("test");
+        String iexp = mExpected.value("test");
         assertEquals(iexp, i);
         assertEquals(mExpected, m);
     }
@@ -162,8 +162,8 @@ public abstract class MapTest {
         Map<String, String> m = this.createFromArgsTest("test", "value");
         Map<String, String> mExpected = this.createFromArgsRef("test", "value");
         
-        boolean i = m.hasKey(test);
-        boolean iexp = mExpected.hasKey(test);
+        boolean i = m.hasKey("test");
+        boolean iexp = mExpected.hasKey("test");
         
         assertEquals(iexp, i);
         assertEquals(mExpected, m);
