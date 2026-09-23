@@ -126,58 +126,97 @@ public abstract class MapTest {
                 "value1");
         Map<String, String> mExpected = this.createFromArgsRef("test", "value", "test1",
                 "value1");
-                
+
         Map.Pair<String, String> i = m.remove("value");
         Map.Pair<String, String> iexp = mExpected.remove("value");
-        
+
         assertEquals(iexp, i);
         assertEquals(mExpected, m);
     }
-    
+
     @Test
     public final void testRemoveAny() {
         Map<String, String> m = this.createFromArgsTest("test", "value");
         Map<String, String> mExpected = this.createFromArgsRef("test", "value");
-        
+
         Map.Pair<String, String> i = m.removeAny();
         Map.Pair<String, String> iexp = mExpected.removeAny();
-        
+
         assertEquals(iexp, i);
         assertEquals(mExpected, m);
     }
-    
+
     @Test
     public final void testValue() {
         Map<String, String> m = this.createFromArgsTest("test", "value");
         Map<String, String> mExpected = this.createFromArgsRef("test", "value");
-        
+
         String i = m.value("test");
         String iexp = mExpected.value("test");
         assertEquals(iexp, i);
         assertEquals(mExpected, m);
     }
-    
+
+    @Test
+    public final void testValueMultple() {
+        Map<String, String> m = this.createFromArgsTest("test", "value", "test1",
+                "value1");
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value", "test1",
+                "value1");
+
+        String i = m.value("test");
+        String iexp = mExpected.value("test");
+
+        assertEquals(iexp, i);
+        assertEquals(mExpected, m);
+    }
+
     @Test
     public final void testHasKey() {
         Map<String, String> m = this.createFromArgsTest("test", "value");
         Map<String, String> mExpected = this.createFromArgsRef("test", "value");
-        
+
         boolean i = m.hasKey("test");
         boolean iexp = mExpected.hasKey("test");
-        
+
         assertEquals(iexp, i);
         assertEquals(mExpected, m);
     }
-    
+
+    @Test
+    public final void testHasKeyMultple() {
+        Map<String, String> m = this.createFromArgsTest("test", "value", "test1",
+                "value1");
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value", "test1",
+                "value1");
+
+        boolean i = m.hasKey("test1");
+        boolean iexp = mExpected.hasKey("test1");
+
+        assertEquals(iexp, i);
+        assertEquals(mExpected, m);
+    }
+
     @Test
     public final void testSize() {
         Map<String, String> m = this.createFromArgsTest("test", "value");
         Map<String, String> mExpected = this.createFromArgsRef("test", "value");
-        
+
         int i = m.size();
         int iexp = mExpected.size();
-        
+
         assertEquals(iexp, i);
+        assertEquals(mExpected, m);
+    }
+
+    @Test
+    public final void testSizeZero() {
+        Map<String, String> m = this.createFromArgsTest();
+        Map<String, String> mExpected = this.createFromArgsRef();
+
+        int i = m.size();
+
+        assertEquals(0, i);
         assertEquals(mExpected, m);
     }
 
