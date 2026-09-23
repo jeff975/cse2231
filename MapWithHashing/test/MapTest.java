@@ -1,3 +1,7 @@
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import components.map.Map;
 
 /**
@@ -45,8 +49,8 @@ public abstract class MapTest {
         assert args.length % 2 == 0 : "Violation of: args.length is even";
         Map<String, String> map = this.constructorTest();
         for (int i = 0; i < args.length; i += 2) {
-            assert !map.hasKey(args[i]) : ""
-                    + "Violation of: the 'key' entries in args are unique";
+            assert !map.hasKey(args[i])
+                    : "" + "Violation of: the 'key' entries in args are unique";
             map.add(args[i], args[i + 1]);
         }
         return map;
@@ -70,8 +74,8 @@ public abstract class MapTest {
         assert args.length % 2 == 0 : "Violation of: args.length is even";
         Map<String, String> map = this.constructorRef();
         for (int i = 0; i < args.length; i += 2) {
-            assert !map.hasKey(args[i]) : ""
-                    + "Violation of: the 'key' entries in args are unique";
+            assert !map.hasKey(args[i])
+                    : "" + "Violation of: the 'key' entries in args are unique";
             map.add(args[i], args[i + 1]);
         }
         return map;
@@ -79,5 +83,102 @@ public abstract class MapTest {
 
     // TODO - add test cases for constructor, add, remove, removeAny, value,
     // hasKey, and size
+
+    @Test
+    public final void testAddFromEmpty() {
+        Map<String, String> m = this.constructorTest();
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value");
+
+        m.add("test", "value");
+
+        // Assert object equality
+        assertEquals(mExpected, m);
+    }
+
+    @Test
+    public final void testAdd() {
+        Map<String, String> m = this.createFromArgsTest("test", "value");
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value", "test1",
+                "value1");
+
+        m.add("test1", "value1");
+
+        // Assert object equality
+        assertEquals(mExpected, m);
+    }
+
+    @Test
+    public final void testAddTwo() {
+        Map<String, String> m = this.createFromArgsTest("test", "value");
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value", "test1",
+                "value1", "test2", "value2");
+
+        m.add("test1", "value1");
+        m.add("test2", "value2");
+
+        // Assert object equality
+        assertEquals(mExpected, m);
+    }
+
+    @Test
+    public final void testRemove() {
+        Map<String, String> m = this.createFromArgsTest("test", "value", "test1",
+                "value1");
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value", "test1",
+                "value1");
+                
+        Map.Pair<String, String> i = m.remove(value)
+        Map.Pair<String, String> iexp = mExpected.remove(value)
+        
+        assertEquals(iexp, i);
+        assertEquals(mExpected, m);
+    }
+    
+    @Test
+    public final void testRemoveAny() {
+        Map<String, String> m = this.createFromArgsTest("test", "value");
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value");
+        
+        Map.Pair<String, String> i = m.removeAny();
+        Map.Pair<String, String> iexp = mExpected.removeAny();
+        
+        assertEquals(iexp, i);
+        assertEquals(mExpected, m);
+    }
+    
+    @Test
+    public final void testValue() {
+        Map<String, String> m = this.createFromArgsTest("test", "value");
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value");
+        
+        String i = m.value(test);
+        String iexp = mExpected.value(test);
+        assertEquals(iexp, i);
+        assertEquals(mExpected, m);
+    }
+    
+    @Test
+    public final void testHasKey() {
+        Map<String, String> m = this.createFromArgsTest("test", "value");
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value");
+        
+        boolean i = m.hasKey(test);
+        boolean iexp = mExpected.hasKey(test);
+        
+        assertEquals(iexp, i);
+        assertEquals(mExpected, m);
+    }
+    
+    @Test
+    public final void testSize() {
+        Map<String, String> m = this.createFromArgsTest("test", "value");
+        Map<String, String> mExpected = this.createFromArgsRef("test", "value");
+        
+        int i = m.size();
+        int iexp = mExpected.size();
+        
+        assertEquals(iexp, i);
+        assertEquals(mExpected, m);
+    }
 
 }
