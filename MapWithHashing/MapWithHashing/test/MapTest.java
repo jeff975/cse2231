@@ -8,7 +8,7 @@ import components.map.Map;
  * JUnit test fixture for {@code Map<String, String>}'s constructor and kernel
  * methods.
  *
- * @author Put your name here
+ * @author Brisy Villalobos and Joshua Anderson
  *
  */
 public abstract class MapTest {
@@ -81,8 +81,58 @@ public abstract class MapTest {
         return map;
     }
 
-    // TODO - add test cases for constructor, add, remove, removeAny, value,
+    // Completed- add test cases for constructor, add, remove, removeAny, value,
     // hasKey, and size
+     @Test
+    public void testConstructorDefault() {
+        /*
+         * Set up variables
+         */
+        Map<String, String> m = this.constructorTest();
+        Map<String, String> ref = this.constructorRef();
+
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(ref.size(), m.size());
+        assertEquals(ref, m);
+    }
+
+    @Test
+    public void testConstructorWithSize() {
+        /*
+         * Set up variables
+         */
+        Map<String, String> m = new Map4<>(1007);
+        Map<String, String> ref = this.constructorRef();
+
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(ref.size(), m.size());
+        assertEquals(ref, m);
+
+    }
+
+    @Test
+    public void testConstructorWithDifferentSize() {
+        /*
+         * Set up variables
+         */
+        Map<String, String> m1 = new Map4<>(2);
+        Map<String, String> m2 = new Map4<>(10);
+        Map<String, String> m3 = new Map4<>(100);
+        Map<String, String> ref = this.constructorRef();
+
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(ref, m1);
+        assertEquals(ref, m2);
+        assertEquals(ref, m3);
+
+    }
+
 
     @Test
     public final void testAddFromEmpty() {
