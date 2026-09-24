@@ -194,7 +194,6 @@ public class Map4<K, V> extends MapSecondary<K, V> {
 
         int index = mod(key.hashCode(), this.hashTable.length);
         this.hashTable[index].add(key, value);
-
     }
 
     @Override
@@ -202,50 +201,49 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert key != null : "Violation of: key is not null";
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return null;
+        int index = mod(key.hashCode(), this.hashTable.length);
+        return this.hashTable[index].remove(key);
     }
 
     @Override
     public final Pair<K, V> removeAny() {
         assert this.size() > 0 : "Violation of: this /= empty_set";
 
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return null;
+        Map.Pair<K, V> result = null;
+        int i = 0;
+        while (i < this.hashTable.length && this.hashTable[i].size() == 0) {
+            i++;
+        }
+        assert i < this.hashTable.length : "Violation of: |this| > 0";
+        result = this.hashTable[i].removeAny();
+        return result;
     }
 
     @Override
     public final V value(K key) {
         assert key != null : "Violation of: key is not null";
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
-
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return null;
+        
+        int index = mod(key.hashCode(), this.hashTable.length);
+        return this.hashTable[index].value(key);
     }
 
     @Override
     public final boolean hasKey(K key) {
         assert key != null : "Violation of: key is not null";
 
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return false;
+        int index = mod(key.hashCode(), this.hashTable.length);
+        return this.hashTable[index].hasKey(key);
     }
 
     @Override
     public final int size() {
 
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return 0;
+        int total = 0;
+        for (int i = 0; i < this.hashTable.length; i++) {
+            total += this.hashTable[i].size();
+        }
+        return total;
     }
 
     @Override
