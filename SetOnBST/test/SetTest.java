@@ -48,6 +48,7 @@ public abstract class SetTest {
         }
         return set;
     }
+
     /*
      * Add test cases: B.V- constructor, remove, contains.
      *
@@ -79,7 +80,8 @@ public abstract class SetTest {
          * Assert that values of variables match expectations
          */
         assertEquals(t2, t1);
-    } 
+    }
+
     @Test
     public void containsEmptyFalse() {
         /*
@@ -159,6 +161,7 @@ public abstract class SetTest {
          */
         assertEquals(false, result);
     }
+
     @Test
     public void removeRoot() {
         /*
@@ -212,12 +215,10 @@ public abstract class SetTest {
         assertEquals("c", removed);
         assertEquals(t2, t1);
     }
-/*
+    /*
      * Add test cases: J.A- add,removeAny, and size.
      *
      */
-
-    
 
     /**
      * Creates and returns a {@code Set<String>} of the reference implementation
@@ -237,8 +238,6 @@ public abstract class SetTest {
         }
         return set;
     }
-
-
 
     @Test
     public void sizeThree() {
@@ -282,7 +281,7 @@ public abstract class SetTest {
          * Set up variables
          */
         Set<String> t1 = this.createFromArgsTest("b");
-        Set<String> t2 = this.createFromArgsRef("b");
+        Set<String> t2 = this.createFromArgsRef();
         /*
          * Call method under test
          */
@@ -291,6 +290,24 @@ public abstract class SetTest {
          * Assert that values of variables match expectations
          */
         assertEquals("b", remove);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void removeAny1() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("b", "a", "c");
+        Set<String> t2 = this.createFromArgsRef("b", "c");
+        /*
+         * Call method under test
+         */
+        String remove = t1.removeAny();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals("a", remove);
         assertEquals(t2, t1);
     }
 
