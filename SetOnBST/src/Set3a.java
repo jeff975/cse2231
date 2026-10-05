@@ -22,7 +22,7 @@ import components.set.SetSecondary;
  * @convention IS_BST($this.tree)
  * @correspondence this = labels($this.tree)
  *
- * @author Birsy Villalobos and Josh Anderson 
+ * @author Birsy Villalobos and Josh Anderson
  *
  */
 public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
@@ -145,11 +145,11 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
 
         if (left.size() == 0 && smallest == null) {
             smallest = root;
+            t.transferFrom(right);
         } else {
             smallest = removeSmallest(left);
+            t.assemble(root, left, right);
         }
-
-        t.assemble(root, left, right);
 
         // This line added just to make the component compilable.
         return smallest;
@@ -202,9 +202,10 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
             }
             t.assemble(root, left, right);
         }
+
         return removed;
     }
-    
+
     /**
      * Helper method returns the size of {@code t}.
      *
@@ -215,7 +216,7 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
      * @return size of {@code t}.
      */
     private static <T> int sizeOfTree(BinaryTree<T> t) {
-        
+
         int size = 0;
         if (t.height() > 0) {
             BinaryTree<T> left = t.newInstance();
@@ -229,7 +230,6 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
 
         return size;
     }
-    
 
     /**
      * Creator of initial representation.
