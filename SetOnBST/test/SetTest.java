@@ -349,4 +349,38 @@ public abstract class SetTest {
          */
         assertEquals(t2, t1);
     }
+
+    @Test
+    public void addr() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("c");
+        Set<String> t2 = this.createFromArgsRef("c", "a");
+        /*
+         * Call method under test
+         */
+        t1.add("a");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void addl() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("c");
+        Set<String> t2 = this.createFromArgsRef("c", "d");
+        /*
+         * Call method under test
+         */
+        t1.add("d");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(t2, t1);
+    }
 }
