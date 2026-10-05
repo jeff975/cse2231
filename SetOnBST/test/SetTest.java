@@ -7,7 +7,7 @@ import components.set.Set;
 /**
  * JUnit test fixture for {@code Set<String>}'s constructor and kernel methods.
  *
- * @author Put your name here
+ * @author Brisy Villalobos and Josh Anderson
  *
  */
 public abstract class SetTest {
@@ -48,6 +48,176 @@ public abstract class SetTest {
         }
         return set;
     }
+    /*
+     * Add test cases: B.V- constructor, remove, contains.
+     *
+     */
+    @Test
+    public void constructorEmpty() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.constructorTest();
+        Set<String> t2 = this.constructorRef();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void constructorAddOne() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.constructorTest();
+        Set<String> t2 = this.constructorRef();
+
+        t1.add("a");
+        t2.add("a");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(t2, t1);
+    } 
+    @Test
+    public void containsEmptyFalse() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.constructorTest();
+        /*
+         * Call method under test
+         */
+        Boolean result = t1.contains("a");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void containsOneTrue() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("b");
+        /*
+         * Call method under test
+         */
+        boolean result = t1.contains("b");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void containsOneFalse() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("a");
+        /*
+         * Call method under test
+         */
+        boolean result = t1.contains("b");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void containsManyTrue() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("a", "b", "c");
+        /*
+         * Call method under test
+         */
+        boolean result = t1.contains("b");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void containsManyFalse() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("a", "b", "c");
+        /*
+         * Call method under test
+         */
+        boolean result = t1.contains("z");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(false, result);
+    }
+    @Test
+    public void removeRoot() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("b", "a", "c");
+        Set<String> t2 = this.createFromArgsRef("a", "c");
+        /*
+         * Call method under test
+         */
+        String removed = t1.remove("b");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals("b", removed);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void removeleaf() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("b", "a", "c");
+        Set<String> t2 = this.createFromArgsRef("b", "c");
+        /*
+         * Call method under test
+         */
+        String removed = t1.remove("a");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals("a", removed);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void removeInternalTwoChildren() {
+        /*
+         * Set up variables
+         */
+        Set<String> t1 = this.createFromArgsTest("m", "c", "t", "a", "d");
+        Set<String> t2 = this.createFromArgsRef("m", "a", "d", "t");
+        /*
+         * Call method under test
+         */
+        String removed = t1.remove("c");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals("c", removed);
+        assertEquals(t2, t1);
+    }
+/*
+     * Add test cases: J.A- add,removeAny, and size.
+     *
+     */
+
+    
 
     /**
      * Creates and returns a {@code Set<String>} of the reference implementation
@@ -68,7 +238,7 @@ public abstract class SetTest {
         return set;
     }
 
-    // TODO - add test cases for constructor, remove, contains
+
 
     @Test
     public void sizeThree() {
