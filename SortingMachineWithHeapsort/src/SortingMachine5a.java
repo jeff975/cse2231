@@ -254,9 +254,21 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
          */
 
         //J.A
-        // TODO - fill in body
-        // *** you must use the recursive algorithm discussed in class ***
+        int size = array.length - top;
 
+        if (size > 1) {
+            int left = top * 2 + 1;
+            int right = 2 * top + 2;
+            int last = array.length - 1;
+
+            if (left <= last) {
+                heapify(array, left, order);
+            }
+            if (right <= last) {
+                heapify(array, right, order);
+            }
+            siftDown(array, top, last, order);
+        }
     }
 
     /**
@@ -510,11 +522,10 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         T first = this.heap[0];
         this.heapSize--;
 
-        if(this.heapSize > 1) {
-            exchangeEntries(, , );
-            siftDown();
+        if (this.heapSize > 1) {
+            exchangeEntries(this.heap, 0, this.heapSize);
+            siftDown(this.heap, 0, this.heapSize, this.machineOrder);
         }
-
 
         assert this.conventionHolds();
         return first;
