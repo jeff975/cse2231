@@ -254,20 +254,15 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
          */
 
         //J.A
-        int size = array.length - top;
 
-        if (size > 1) {
+        //check for just root
+        if (top < array.length) {
             int left = top * 2 + 1;
             int right = 2 * top + 2;
-            int last = array.length - 1;
 
-            if (left <= last) {
-                heapify(array, left, order);
-            }
-            if (right <= last) {
-                heapify(array, right, order);
-            }
-            siftDown(array, top, last, order);
+            heapify(array, left, order);
+            heapify(array, right, order);
+            siftDown(array, top, array.length - 1, order);
         }
     }
 
@@ -519,9 +514,11 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         assert this.size() > 0 : "Violation of: this.contents /= {}";
 
         //J.A
+        //grabs the first one and decrease size by one
         T first = this.heap[0];
         this.heapSize--;
 
+        //fixes the heap
         if (this.heapSize > 1) {
             exchangeEntries(this.heap, 0, this.heapSize);
             siftDown(this.heap, 0, this.heapSize, this.machineOrder);
