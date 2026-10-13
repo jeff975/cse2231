@@ -253,6 +253,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
          * representation for a complete binary tree.
          */
 
+        //J.A
         // TODO - fill in body
         // *** you must use the recursive algorithm discussed in class ***
 
@@ -485,6 +486,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         assert x != null : "Violation of: x is not null";
         assert this.isInInsertionMode() : "Violation of: this.insertion_mode";
 
+        //J.A
         this.entries.enqueue(x);
 
         assert this.conventionHolds();
@@ -504,6 +506,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         assert !this.isInInsertionMode() : "Violation of: not this.insertion_mode";
         assert this.size() > 0 : "Violation of: this.contents /= {}";
 
+        //J.A
         T first = this.heap[0];
         this.heapSize--;
 
